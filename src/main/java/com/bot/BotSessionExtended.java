@@ -312,8 +312,9 @@ public class BotSessionExtended implements BotSession {
             } catch (InvalidObjectException | SocketException var29) {
                 BotLogger.severe("BOTSESSION", var29);
             } catch (TelegramApiRequestException var32){
-                if (var32.getApiResponse().contains("409")){
+                if (var32.getErrorCode().equals(409)){
                     this.interrupt();
+                    BotSessionExtended.this.stop();
                 }else{
                     BotLogger.severe("BOTSESSION", var32);
                 }
